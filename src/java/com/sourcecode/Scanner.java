@@ -47,10 +47,37 @@ public class Scanner {
             case '<': addToken(match('=') ? TokenType.LESS_EQUAL : TokenType.LESS); break;
             case '>': addToken(match('=') ? TokenType.GREATER_EQUAL : TokenType.GREATER); break;
 
+            case '/':
+                if (match('/')) {
+                    // Comments go until the end of the line
+                    while (peek() != '\n' && !isAtEnd()) {
+                        advance();
+                    }
+                } else {
+                    addToken(TokenType.SLASH);
+                }
+                break;
+
+            case ' ':
+            case '\r':
+            case '\t':
+                // Ignore whitespace
+                break;
+
+            case '\n':
+                line++;
+                break;
+
+            case '"': string(); break;
+
             default:
                 Carbon.error(line, "Unexpected character '" + c + "'");
                 break;
         }
+    }
+
+    private void string() {
+        
     }
 
     private boolean match(char expected) {
@@ -64,6 +91,14 @@ public class Scanner {
 
         current++;
         return true;
+    }
+
+    private char peek() {
+        if (isAtEnd()) {
+            return '\0';
+        }
+
+        return source.charAt(current);
     }
 
     private boolean isAtEnd() {
