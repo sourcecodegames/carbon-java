@@ -1,4 +1,4 @@
-package java.com.sourcecode;
+package com.sourcecode.carbon;
 
 import java.io.BufferedReader;
 import java.io.IOException;
