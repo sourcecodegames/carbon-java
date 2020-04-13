@@ -77,7 +77,28 @@ public class Scanner {
     }
 
     private void string() {
-        
+        while (peek() != '"' && !isAtEnd()) {
+            if (peek() == '\n') {
+                // Carbon supports multi-line strings
+                line++;
+            }
+            advance();
+        }
+
+        if (isAtEnd()) {
+            Carbon.error(line, "Unterminated string");
+            return;
+        }
+
+        // The closing "
+        advance();
+
+        // Trim the surrounding quotes
+        String value = source.substring(start + 1, current - 1);
+
+        // If Carbon would support escape sequences like '\n'
+        // we would unescape those here
+        addToken(TokenType.STRING, value);
     }
 
     private boolean match(char expected) {
