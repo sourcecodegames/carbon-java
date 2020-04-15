@@ -40,7 +40,7 @@ public class Carbon {
         BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
 
         for (;;) {
-            System.out.print("> ");
+            System.out.print("carbon > ");
             run(bufferedReader.readLine());
             hadError = false;
         }
