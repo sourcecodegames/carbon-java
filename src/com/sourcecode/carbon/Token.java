@@ -2,10 +2,10 @@ package com.sourcecode.carbon;
 
 public class Token {
 
-    private final TokenType tokenType;
-    private final String lexeme;
-    private final Object literal;
-    private final int line;
+    protected final TokenType tokenType;
+    protected final String lexeme;
+    protected final Object literal;
+    protected final int line;
 
     public Token(TokenType tokenType, String lexeme, Object literal, int line) {
         this.tokenType = tokenType;
